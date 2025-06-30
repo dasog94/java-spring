@@ -1,3 +1,7 @@
 spring:
   application:
     name: java-spring
+
+grpc:
+  port: 6565 # default gRPC port
+

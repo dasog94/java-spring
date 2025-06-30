@@ -1,0 +1,30 @@
+// refer to https://protobuf.dev/getting-started/javatutorial/
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package example.javaspring.domain.greet;
+
+option java_multiple_files = true;
+option java_package = "org.example.javaspring.domain.greet.proto";
+option java_outer_classname = "GreeterProto";
+
+// The greeter service definition.
+service GreeterService {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+//service SecuredGreeterService {
+//  rpc SayAuthHello ( google.protobuf.Empty) returns (  HelloReply) {}
+//}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
