@@ -1,0 +1,39 @@
+/*
+refer to https://protobuf.dev/getting-started/javatutorial/
+Please execute generateProto or Build Task to generate the Java classes from this proto file.
+*/
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package example.javaspring.domain.greet;
+
+option java_multiple_files = true; // if true, generates separate .java files for each message and service
+option java_package = "org.example.javaspring.domain.greet.proto";
+option java_outer_classname = "GreeterProto";
+
+/*
+define the service interface for gRPC.
+- gRPC Types: https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
+ */
+service GreeterService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);  // Unary RPC
+  rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);  // Server streaming RPC
+  rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);  // Client streaming RPC
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);  // Bidirectional streaming RPC
+}
+
+//service SecuredGreeterService {
+//  rpc SayAuthHello ( google.protobuf.Empty) returns (  HelloReply) {}
+//}
+
+message HelloRequest {
+  string name = 1;      // 이름
+  int32 age = 2;        // 나이
+  string message = 3;   // 하고 싶은 말 메시지
+}
+
+message HelloResponse {
+  string greeting_message = 1;  // 인사 메시지
+  string question_message = 2;  // 질문 메시지
+}
