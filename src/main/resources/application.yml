@@ -5,3 +5,8 @@ spring:
 grpc:
   port: 6565 # default gRPC port
 
+my:
+    grpc:
+        client:
+          port: 6566 # gRPC client port
+          host: localhost # gRPC client host

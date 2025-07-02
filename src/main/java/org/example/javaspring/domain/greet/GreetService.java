@@ -11,11 +11,20 @@ public class GreetService extends GreeterServiceGrpc.GreeterServiceImplBase {
 
     @Override
     public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        HelloReply reply = HelloReply.newBuilder()
-                .setMessage("Hello " + request.getName())
-                .build();
+        try {
+            HelloReply reply = HelloReply.newBuilder()
+                    .setMessage("Hello " + request.getName())
+                    .build();
 
-        responseObserver.onNext(reply);
-        responseObserver.onCompleted();
+            responseObserver.onNext(reply);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(
+                    io.grpc.Status.INTERNAL
+                            .withDescription("Inner Server Error")
+                            .withCause(e)
+                            .asRuntimeException()
+            );
+        }
     }
 }
