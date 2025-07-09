@@ -1,5 +1,6 @@
 package org.example.javaspring.infra.event;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
