@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.javaspring.domain.greet.proto.GreeterServiceGrpc;
 import org.example.javaspring.domain.greet.proto.HelloRequest;
 import org.example.javaspring.domain.greet.proto.HelloResponse;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

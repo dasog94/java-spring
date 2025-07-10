@@ -6,7 +6,11 @@ grpc:
   port: 6565 # default gRPC port
 
 my:
-    grpc:
-        client:
-          port: 6566 # gRPC client port
-          host: localhost # gRPC client host
+  grpc:
+    client:
+      port: 6565 # gRPC client port
+      host: localhost # gRPC client host
+
+  netty:
+    server:
+      port: 18080

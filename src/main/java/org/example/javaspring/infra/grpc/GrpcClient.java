@@ -5,8 +5,11 @@ import io.grpc.ManagedChannelBuilder;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.javaspring.domain.greet.GreetServerService;
 import org.example.javaspring.domain.greet.proto.GreeterServiceGrpc;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +29,7 @@ public class GrpcClient {
     private int grpcPort;
 
     @Bean
-    public ManagedChannel grpcChannel() {
+    public ManagedChannel grpcChannel() throws InterruptedException {
         return ManagedChannelBuilder.forAddress(grpcHost, grpcPort)
                 .usePlaintext()
                 .build();
