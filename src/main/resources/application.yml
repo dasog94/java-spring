@@ -1,6 +1,18 @@
 spring:
   application:
     name: java-spring
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
 grpc:
   port: 6565 # default gRPC port
@@ -10,3 +22,7 @@ my:
         client:
           port: 6566 # gRPC client port
           host: localhost # gRPC client host
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.javaspring.domain.article.repository.ArticleMapper">
+    <resultMap id="ArticleResultMap" type="org.example.javaspring.domain.article.model.Article">
+        <id property="id" column="id" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="status" column="status" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <select id="findById" resultMap="ArticleResultMap">
+        SELECT * FROM article WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="ArticleResultMap">
+        SELECT * FROM article
+    </select>
+
+    <select id="findBySearchCondition" resultMap="ArticleResultMap">
+        SELECT * FROM article
+        <where>
+            <if test="title != null and title != ''">
+                title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <insert id="create" parameterType="org.example.javaspring.domain.article.model.Article">
+        INSERT INTO article (title, content, status, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{status}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <update id="updateContent" parameterType="org.example.javaspring.domain.article.model.Article">
+        UPDATE article SET content = #{content}, updated_at = #{updatedAt} WHERE id = #{id}
+    </update>
+
+    <update id="updateStatus" parameterType="org.example.javaspring.domain.article.model.Article">
+        UPDATE article SET status = #{status}, updated_at = #{updatedAt} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM article WHERE id = #{id}
+    </delete>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM article
+    </select>
+
+    <select id="countBySearchCondition" resultType="int">
+        SELECT COUNT(*) FROM article
+        <where>
+            <if test="title != null and title != ''">
+                title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+</mapper>
+
